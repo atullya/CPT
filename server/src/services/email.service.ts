@@ -72,11 +72,13 @@ import { passwordResetTemplate } from '../utils/emailHelper';
 const transporter = nodemailer.createTransport({
   host: ENV.SMTP_HOST,
   port: Number(ENV.SMTP_PORT),
-  secure: ENV.SMTP_PORT === '465',
+  secure: true,
   auth: {
     user: ENV.SMTP_USER,
     pass: ENV.SMTP_PASS,
   },
+  connectionTimeout: 10000, // 10 seconds
+  socketTimeout: 10000,
 });
 
 export class EmailService {
