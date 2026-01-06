@@ -196,7 +196,7 @@ const Dashboard: React.FC = () => {
             <div className="w-full bg-white p-6 gap-6 flex flex-col">
               <div className="flex flex-col gap-2">
                 <h1 className="font-plus-jakarta font-semibold text-[24px] leading-[28px] text-[#18181B]">
-                  Welcome to Fuse CPT, {user?.name || "User"}!
+                  Welcome to  CPT, {user?.name || "User"}!
                 </h1>
                 <p className="font-plus-jakarta font-normal text-[16px] leading-[24px] text-[#71717A]">
                   Track your candidates seamlessly across every interview stage.
