@@ -7,7 +7,7 @@
     "build": "tsc --noEmit",
     "start": "tsx src/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prepare": "husky && husky install",
+    "prepare": "if [ \"$CI\" != \"true\" ]; then husky install; fi",
     "format": "prettier --write .",
     "seed:users": "tsx ./src/seeds/seedUsers.ts",
     "seed:jobs": "tsx ./src/seeds/seedJobs.ts",

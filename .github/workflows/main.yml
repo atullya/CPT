@@ -7,17 +7,18 @@ on:
     branches: ["main"]
 
 jobs:
-  # --- FRONTEND (CLIENT) JOB ---
+  # ================= FRONTEND (CLIENT) =================
   frontend-ci:
     runs-on: ubuntu-latest
     defaults:
       run:
         working-directory: ./client
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Use Node.js
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
@@ -26,21 +27,24 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
+        env:
+          HUSKY: 0
 
-      - name: Run Build
+      - name: Build frontend
         run: npm run build
 
-  # --- BACKEND (SERVER) JOB ---
+  # ================= BACKEND (SERVER) =================
   backend-ci:
     runs-on: ubuntu-latest
     defaults:
       run:
         working-directory: ./server
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Use Node.js
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
@@ -49,30 +53,41 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
+        env:
+          HUSKY: 0
 
-      - name: Run Backend Build/Checks
+      - name: Run backend build (if exists)
         run: |
           if npm run | grep -q "build"; then
             npm run build
+          else
+            echo "No backend build script found"
           fi
 
-      - name: Run Tests/Seeds
+      - name: Run seeds & tests (optional)
         run: |
-          npm run seed:users || echo "Seed script not found"
+          npm run seed:users || echo "No seed script found"
           npm test || echo "No tests found"
 
-  # --- DEPLOYMENT ---
+  # ================= DEPLOY =================
   deploy:
     needs: [frontend-ci, backend-ci]
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     runs-on: ubuntu-latest
+
     steps:
-      - name: Trigger Render Deploy
+      - name: Trigger Render Deployment
         run: |
-          # Replace these with your actual secret names in GitHub Settings
           if [ -n "${{ secrets.RENDER_CLIENT_HOOK }}" ]; then
+            echo "Deploying Frontend..."
             curl -X POST "${{ secrets.RENDER_CLIENT_HOOK }}"
+          else
+            echo "No frontend deploy hook found"
           fi
+
           if [ -n "${{ secrets.RENDER_SERVER_HOOK }}" ]; then
+            echo "Deploying Backend..."
             curl -X POST "${{ secrets.RENDER_SERVER_HOOK }}"
+          else
+            echo "No backend deploy hook found"
           fi
