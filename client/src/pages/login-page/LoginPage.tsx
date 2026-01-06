@@ -89,12 +89,15 @@ const LoginPage: React.FC = () => {
       tabIndex={0}
     >
       <div className="h-screen md:w-1/2 w-full bg-[#FFFFFF] flex flex-col items-center justify-center px-4 md:px-0">
-        <div className="flex h-10 w-[165px] items-center justify-center gap-2 mb-6 sm:mb-8">
+        <div className="flex items-center justify-center gap-2 mb-6 sm:mb-8">
           <img
             src={cpt_logo_large}
             alt="Logo"
-            className="w-full h-full object-contain"
-          />
+            className="w-12 h-12 object-contain"
+          />{" "}
+          <span className="font-montserrat font-medium text-2xl text-[#18181B]">
+            CPT
+          </span>
         </div>
 
         <Card className="w-full max-w-[384px] p-6 rounded-lg border border-[#E4E4E7] shadow-sm">

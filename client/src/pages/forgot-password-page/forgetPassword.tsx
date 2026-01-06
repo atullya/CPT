@@ -70,8 +70,11 @@ const ForgetPasswordPage: React.FC = () => {
           <img
             src={cpt_logo_large}
             alt="Logo"
-            className="w-full h-full object-contain"
+            className="w-12 h-12 object-contain"
           />
+          <span className="font-montserrat font-medium text-2xl text-[#18181B]">
+            CPT
+          </span>
         </div>
 
         <Card className="w-full max-w-[384px] p-6 rounded-lg border border-[#E4E4E7] shadow-sm">
