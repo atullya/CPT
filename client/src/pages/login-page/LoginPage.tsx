@@ -1,8 +1,14 @@
 ﻿import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import cpt_logo_large from "@/assets/cpt_logo_extended.svg";
+import cpt_logo_large from "@/assets/logo.png";
 import sampleImage from "@/assets/login.svg";
-import { Card, CardHeader, CardContent, CardTitle, CardDescription } from "@/components/ui/Card";
+import {
+  Card,
+  CardHeader,
+  CardContent,
+  CardTitle,
+  CardDescription,
+} from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import { TextInput } from "@/components/ui/TextInput";
 import { PasswordInput } from "@/components/ui/PasswordInput";
@@ -64,7 +70,8 @@ const LoginPage: React.FC = () => {
           : "";
 
       if (msg.includes("email")) setEmailError("Email not found");
-      else if (msg.includes("password")) setPasswordError("Password not correct");
+      else if (msg.includes("password"))
+        setPasswordError("Password not correct");
       else setPasswordError("Invalid email or password");
     }
   };
@@ -76,17 +83,18 @@ const LoginPage: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col md:flex-row h-screen w-screen bg-[#F9FAFB]" onKeyDown={handleKeyDown} tabIndex={0}>
+    <div
+      className="flex flex-col md:flex-row h-screen w-screen bg-[#F9FAFB]"
+      onKeyDown={handleKeyDown}
+      tabIndex={0}
+    >
       <div className="h-screen md:w-1/2 w-full bg-[#FFFFFF] flex flex-col items-center justify-center px-4 md:px-0">
         <div className="flex h-10 w-[165px] items-center justify-center gap-2 mb-6 sm:mb-8">
-          
-            <img
-              src={cpt_logo_large}
-              alt="Logo"
-              className="w-full h-full object-contain"
-            />
-          
-          
+          <img
+            src={cpt_logo_large}
+            alt="Logo"
+            className="w-full h-full object-contain"
+          />
         </div>
 
         <Card className="w-full max-w-[384px] p-6 rounded-lg border border-[#E4E4E7] shadow-sm">
@@ -145,9 +153,9 @@ const LoginPage: React.FC = () => {
               disabled={!isFormFilled}
               onClick={handleLogin}
               className="w-full text-[14px] font-semibold rounded-lg mt-4"
-              style={(isLoading || isSubmitting) ? { pointerEvents: 'none' } : {}}
+              style={isLoading || isSubmitting ? { pointerEvents: "none" } : {}}
             >
-              {(isLoading || isSubmitting) ? "Logging..." : "Log in"}
+              {isLoading || isSubmitting ? "Logging..." : "Log in"}
             </Button>
           </CardContent>
         </Card>

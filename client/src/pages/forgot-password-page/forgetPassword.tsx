@@ -1,6 +1,6 @@
 ﻿import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import cpt_logo_large from "@/assets/cpt_logo_extended.svg";
+import cpt_logo_large from "@/assets/logo.png";
 import sampleImage from "@/assets/login.svg";
 import {
   Card,
